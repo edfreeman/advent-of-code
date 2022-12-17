@@ -29,19 +29,19 @@ def _update_next_knot(current_leader_position, current_follower_position):
     match difference:
         case (0, 2):
             new_f_pos = (f_x_pos, f_y_pos + 1)
-        case (1, 2) | (2, 1):
+        case (1, 2) | (2, 1) | (2, 2):
             new_f_pos = (f_x_pos + 1, f_y_pos + 1)
         case (2, 0):
             new_f_pos = (f_x_pos + 1, f_y_pos)
-        case (2, -1) | (1, -2):
+        case (2, -1) | (1, -2) | (2, -2):
             new_f_pos = (f_x_pos + 1, f_y_pos - 1)
         case (0, -2):
             new_f_pos = (f_x_pos, f_y_pos - 1)
-        case (-1, -2) | (-2, -1):
+        case (-1, -2) | (-2, -1) | (-2, -2):
             new_f_pos = (f_x_pos - 1, f_y_pos - 1)
         case (-2, 0):
             new_f_pos = (f_x_pos - 1, f_y_pos)
-        case (-2, 1) | (-1, 2):
+        case (-2, 1) | (-1, 2) | (-2, 2):
             new_f_pos = (f_x_pos - 1, f_y_pos + 1)
 
     return new_f_pos
@@ -95,6 +95,81 @@ def part_1(input):
     return number_positions
 
 
-result = part_1(input)
+def part_2(input):
+    instructions = _parse_instructions(input)
+
+    h_positions = [(0, 0),]
+    follower_positions = {i: [(0, 0),] for i in range(1, 10)}
+
+    for instruction in instructions:
+        direction = instruction["direction"]
+        steps_range = range(instruction["steps"])
+        match direction:
+            case "U":
+                for step in steps_range:
+                    last_h_position = h_positions[-1]
+                    new_h_position = (last_h_position[0], last_h_position[1] + 1)
+                    h_positions.append(new_h_position)
+
+                    leader_positions = h_positions[-2:]
+                    i = 1
+                    while (leader_positions[1] != leader_positions[0]) & (i < 10):
+                        next_follower_pos = _update_next_knot(leader_positions[1], follower_positions[i][-1])
+                        follower_positions[i].append(next_follower_pos)
+
+                        leader_positions = follower_positions[i][-2:]
+                        i += 1
+
+            case "R":
+                for step in steps_range:
+                    last_h_position = h_positions[-1]
+                    new_h_position = (last_h_position[0] + 1, last_h_position[1])
+                    h_positions.append(new_h_position)
+
+                    leader_positions = h_positions[-2:]
+                    i = 1
+                    while (leader_positions[1] != leader_positions[0]) & (i < 10):
+                        next_follower_pos = _update_next_knot(leader_positions[1], follower_positions[i][-1])
+                        follower_positions[i].append(next_follower_pos)
+
+                        leader_positions = follower_positions[i][-2:]
+                        i += 1
+            case "D":
+                for step in steps_range:
+                    last_h_position = h_positions[-1]
+                    new_h_position = (last_h_position[0], last_h_position[1] - 1)
+                    h_positions.append(new_h_position)
+
+                    leader_positions = h_positions[-2:]
+                    i = 1
+                    while (leader_positions[1] != leader_positions[0]) & (i < 10):
+                        next_follower_pos = _update_next_knot(leader_positions[1], follower_positions[i][-1])
+                        follower_positions[i].append(next_follower_pos)
+
+                        leader_positions = follower_positions[i][-2:]
+                        i += 1
+            case "L":
+                for step in steps_range:
+                    last_h_position = h_positions[-1]
+                    new_h_position = (last_h_position[0] - 1, last_h_position[1])
+                    h_positions.append(new_h_position)
+
+                    leader_positions = h_positions[-2:]
+                    i = 1
+                    while (leader_positions[1] != leader_positions[0]) & (i < 10):
+                        next_follower_pos = _update_next_knot(leader_positions[1], follower_positions[i][-1])
+                        follower_positions[i].append(next_follower_pos)
+
+                        leader_positions = follower_positions[i][-2:]
+                        i += 1
+
+    number_positions = len(set(follower_positions[9]))
+
+    return number_positions
+
+
+# result = part_1(input)
+
+result = part_2(input)
 
 print(result)
