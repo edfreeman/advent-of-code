@@ -1,4 +1,5 @@
 import os
+from functools import reduce
 
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
@@ -39,7 +40,7 @@ def part_1(input):
             for item in items:
                 func = eval("lambda old : " + monkey_config["operation"])
                 new_val = func(item)
-                new_val = new_val // 3
+                # new_val = new_val // 3
                 if new_val % monkey_config["test"]["divisible_by"] == 0:
                     monkeys[monkey_config["test"]["if_true_target"]]["items"].append(new_val)
                 else:
@@ -59,6 +60,39 @@ def part_1(input):
     return result
 
 
-result = part_1(input)
+def part_2(input):
+    monkeys = _parse_instructions(input)
+    divisible_bys = set([monkey["test"]["divisible_by"] for monkey in monkeys.values()])
+    lcm = reduce(lambda a, b: a * b, divisible_bys)
+
+    monkey_inspections = {i: 0 for i in monkeys}
+
+    for round in range(10000):
+        for monkey_number, monkey_config in monkeys.items():
+            items = monkey_config["items"]
+            for item in items:
+                func = eval("lambda old : " + monkey_config["operation"])
+                new_val = func(item)
+                new_val = new_val % lcm
+                if new_val % monkey_config["test"]["divisible_by"] == 0:
+                    monkeys[monkey_config["test"]["if_true_target"]]["items"].append(new_val)
+                else:
+                    monkeys[monkey_config["test"]["if_false_target"]]["items"].append(new_val)
+
+            monkey_inspections[monkey_number] += len(items)
+            monkey_config["items"] = []
+
+    inspection_counts = list(monkey_inspections.values())
+
+    inspection_counts.sort(reverse=True)
+
+    top_two = inspection_counts[:2]
+
+    result = top_two[0] * top_two[1]
+
+    return result
+
+# result = part_1(input)
+result = part_2(input)
 
 print(result)
