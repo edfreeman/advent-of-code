@@ -13,7 +13,7 @@ test_input = f.read().splitlines()
 def test_part_1():
     result = day_10.part_1(test_input)
 
-    assert result == 13140
+    assert result[0] == 13140
 
 
 def test_part_2():
