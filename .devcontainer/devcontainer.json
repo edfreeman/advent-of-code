@@ -9,41 +9,52 @@
 	"forwardPorts": [ 4040 ],
 
 	// Set *default* container specific settings.json values on container create.
-	"settings": {
-		"terminal.integrated.profiles.linux": {
-			"pyspark": {
-			"path": "/spark/bin/pyspark",
-			"args": []
-			}
-		},
-		"python.defaultInterpreterPath": "./.venv/bin/python",
-		"python.pythonPath": "./.venv/bin/python",
-		"python.linting.enabled": true,
-		"python.linting.pylintEnabled": false,
-		"python.linting.flake8Enabled": true,
-		"python.languageServer": "Pylance",
-		"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
-		"python.formatting.blackPath": "/usr/local/py-utils/bin/black",
-		"python.formatting.yapfPath": "/usr/local/py-utils/bin/yapf",
-		"python.linting.banditPath": "/usr/local/py-utils/bin/bandit",
-		"python.linting.flake8Path": "/usr/local/py-utils/bin/flake8",
-		"python.linting.mypyPath": "/usr/local/py-utils/bin/mypy",
-		"python.linting.pycodestylePath": "/usr/local/py-utils/bin/pycodestyle",
-		"python.linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
-		"python.linting.pylintPath": "/usr/local/py-utils/bin/pylint",
-		"python.linting.flake8Args": [
-			"--config=.flake8"
-		]
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"files.exclude": {
+					"**/__pycache__": true,
+					".pytest_cache": true,
+					".venv": true
+				},
+				"flake8.args": ["--config=.flake8"],
+				"python.defaultInterpreterPath": "./.venv/bin/python",
+				"python.pythonPath": "./.venv/bin/python",
+				"python.languageServer": "Pylance",
+				"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
+				"python.formatting.autopep8Args": ["--max-line-length", "120", "--experimental"],
+				"python.formatting.blackPath": "/usr/local/py-utils/bin/black",
+				"python.formatting.yapfPath": "/usr/local/py-utils/bin/yapf",
+				"python.testing.pytestEnabled": true,
+				"python.terminal.activateEnvironment": true,
+				"python.experiments.optInto": ["pythonTerminalEnvVarActivation"],
+				"[python]": {
+					"editor.rulers": [
+						{
+							"column": 120,
+							"color": "#5a5a5a"
+						}
+					],
+					"rewrap.wrappingColumn": 120,
+					"rewrap.autoWrap.enabled": true
+				}
+			},
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"mechatroner.rainbow-csv",
+				"janisdd.vscode-edit-csv",
+				"ms-azuretools.vscode-docker",
+				"tamasfe.even-better-toml",
+				"GrapeCity.gc-excelviewer",
+				"stkb.rewrap",
+				"jimasp.behave-vsc@0.6.4",
+				"alexkrechik.cucumberautocomplete",
+				"ms-python.flake8"
+			]
+		}
 	},
-
-	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-		"ms-python.python",
-		"littlefoxteam.vscode-python-test-adapter",
-		"mechatroner.rainbow-csv",
-		"janisdd.vscode-edit-csv",
-		"ms-azuretools.vscode-docker",
-	],
 	
 	// Use 'postCreateCommand' to run commands after the container is created.
 	"postCreateCommand": "poetry install",

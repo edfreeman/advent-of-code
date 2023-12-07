@@ -66,13 +66,14 @@ def part_2():
                 if last_occurrence_position >= current_max_index:
                     current_max_index = last_occurrence_position
                     last_value = n
-        
+
         calibration_value = int(number_names[first_value] + number_names[last_value])
         calibration_values.append(calibration_value)
 
     result = sum(calibration_values)
 
     print(result)
+
 
 part_1()
 
