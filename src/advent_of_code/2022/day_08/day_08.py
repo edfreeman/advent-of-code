@@ -21,7 +21,7 @@ def part_1(input):
 
     for i in range(1, number_elements - 1):
         for j in range(1, number_elements - 1):
-            current_element = matrix[i,j]
+            current_element = matrix[i, j]
             max_left_element = max(matrix[i, :j])
             max_right_element = max(matrix[i, (j+1):])
             max_above_element = max(matrix[:i, j])
@@ -56,7 +56,7 @@ def part_2(input):
 
     for i in range(1, number_elements - 1):
         for j in range(1, number_elements - 1):
-            current_element = matrix[i,j]
+            current_element = matrix[i, j]
 
             above_offset = 0
             while i - above_offset > 0:

@@ -1,3 +1,5 @@
+# flake8: noqa: E122
+
 import os
 import importlib
 

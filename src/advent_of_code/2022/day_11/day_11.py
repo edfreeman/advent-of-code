@@ -10,7 +10,7 @@ input = f.read().splitlines()
 
 def _parse_instructions(input):
     number_of_monkeys = (len(input) + 1) // 7
-    # monkey_instructions_split = [input[p:p+6] for i in range(number_of_monkeys) if (p := i*7)] # Why does this not work?
+    # monkey_instructions_split = [input[p:p+6] for i in range(number_of_monkeys) if (p := i*7)] #Why doesn't this work?
     monkey_instructions_split = [input[(i*7):(i*7)+6] for i in range(number_of_monkeys)]
 
     monkey_instructions_parsed = {
@@ -91,6 +91,7 @@ def part_2(input):
     result = top_two[0] * top_two[1]
 
     return result
+
 
 # result = part_1(input)
 result = part_2(input)

@@ -18,7 +18,7 @@ def parse_input():
     stacks = {}
 
     for i in range(0, 9):
-        stacks[i+1] = [val for row in data if (val := row[(i*4 + 1)]) and val is not ' ']
+        stacks[i+1] = [val for row in data if (val := row[(i*4 + 1)]) and val != ' ']
 
     instructions = []
 

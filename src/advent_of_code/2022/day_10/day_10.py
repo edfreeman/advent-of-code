@@ -66,6 +66,7 @@ def part_2(register):
 
     return "\n".join(image_rows)
 
+
 result, register = part_1(input)
 
 result = part_2(register)

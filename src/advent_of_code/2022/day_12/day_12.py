@@ -1,8 +1,8 @@
 import os
 import numpy as np
 
-# __location__ = os.path.realpath(
-#     os.path.join(os.getcwd(), os.path.dirname(__file__)))
+__location__ = os.path.realpath(
+    os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
 # f = open(os.path.join(__location__, 'input.txt'))
 # input = f.read().splitlines()
@@ -38,22 +38,22 @@ def _get_next_element(matrix, current_position):
     element_right = (current_row, current_column + 1) if current_column < matrix_width - 1 else None
     options = {}
 
-    options["up"] = { 
+    options["up"] = {
         "position": element_above,
         "value": matrix[element_above] if element_above else None
     }
 
-    options["down"] = { 
+    options["down"] = {
         "position": element_below,
         "value": matrix[element_below] if element_below else None
     }
 
-    options["left"] = { 
+    options["left"] = {
         "position": element_left,
         "value": matrix[element_left] if element_left else None
     }
 
-    options["right"] = { 
+    options["right"] = {
         "position": element_right,
         "value": matrix[element_right] if element_right else None
     }
