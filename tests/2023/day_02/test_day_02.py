@@ -19,4 +19,4 @@ def test_part_1():
 def test_part_2():
     result = module.part_2(test_input)
 
-    assert result == 24933642
+    assert result == 2286

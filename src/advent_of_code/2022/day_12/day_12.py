@@ -1,11 +1,11 @@
 import os
 import numpy as np
 
-__location__ = os.path.realpath(
-    os.path.join(os.getcwd(), os.path.dirname(__file__)))
+# __location__ = os.path.realpath(
+#     os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
-f = open(os.path.join(__location__, 'input.txt'))
-input = f.read().splitlines()
+# f = open(os.path.join(__location__, 'input.txt'))
+# input = f.read().splitlines()
 
 
 def _parse_matrix(input):
@@ -106,6 +106,6 @@ def part_1(input):
     return counter
 
 
-result = part_1(input)
+# result = part_1(input)
 
-print(result)
+# print(result)
