@@ -7,6 +7,7 @@ authors = ["Ed Freeman <Ed.Freeman@endjin.com>"]
 [tool.poetry.dependencies]
 python = "^3.11"
 numpy = "^1.23.5"
+pandas = "^2.1.4"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.2.0"

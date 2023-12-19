@@ -11,12 +11,12 @@ test_input = f.read().splitlines()
 
 
 def test_part_1():
-    result = module.part_1(test_input)
+    result, _ = module.part_1(test_input)
 
     assert result == 4361
 
 
-# def test_part_2():
-#     result = module.part_2(test_input)
+def test_part_2():
+    result = module.part_2(test_input)
 
-#     assert result == 2286
+    assert result == 467835
