@@ -1,5 +1,3 @@
-# flake8: noqa: F841
-
 def _parse_instructions(input):
     instructions = []
     for line in input:

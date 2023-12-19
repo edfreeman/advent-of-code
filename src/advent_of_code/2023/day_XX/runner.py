@@ -1,5 +1,5 @@
 import os
-import day_X as module
+import day_XX as module
 
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
